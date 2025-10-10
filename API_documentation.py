@@ -6,7 +6,7 @@ import logging
 import json
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def check_success_request(params):
+def check_success_request(url, params):
     """
 
     :param headers: User-Agent одинаковый для запросов из search и reverse, можно посмотреть в Devtools, без него response_json не вернется
@@ -47,9 +47,9 @@ def search_geokoding(query):
     :param query: запрос считываем из файлика test_data_searche.txt
     :return: в случае успешного получения response_json возвращаем долготу и широту в формате "lon lat" , иначе "None"
     """
-
+    url = "https://nominatim.openstreetmap.org/search"
     params = {"q": query, "format": "json"}
-    response_json = check_success_request(params)
+    response_json = check_success_request(url, params)
     if response_json:
             lon = response_json[0].get("lon")  # lon - Longitude ( долгота)
             lat = response_json[0].get("lat")  # lat - Latitude (широта)
@@ -67,9 +67,9 @@ def reverse_geokoding(lon, lat):
     :param lat: считываем из файла с помощью функции load_test_data
     :return: name , если запрос response_json был успешен, в противном случае "None"
     """
-
+    url = "https://nominatim.openstreetmap.org/reverse"
     params = {"lon": lon, "lat": lat, "format": "json"}
-    response_json = check_success_request(params)
+    response_json = check_success_request(url, params)
     if response_json:
         with allure.step("Извлечение name из json"):
             print('Success!')

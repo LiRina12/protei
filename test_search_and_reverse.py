@@ -17,7 +17,7 @@ class TestSearchGeokoding:
     """
     file_path = "/home/litvinova-i/PycharmProjects/test1/tests/test_data_searche.txt"
     test_data = load_test_data(file_path, False)
-    url = "https://nominatim.openstreetmap.org/search"
+
 
     @allure.feature("search_geokoding")
     @pytest.mark.parametrize("test_data", test_data)
@@ -33,7 +33,7 @@ class TestSearchGeokoding:
 class TestReverseGeokoding:
     file_path = "nomunation_test/test_data_reverse.txt"
     test_data = load_test_data(file_path, False)
-    url = "https://nominatim.openstreetmap.org/reverse"
+
 
     @allure.feature("reverse_geokoding")
     @pytest.mark.parametrize("test_data", test_data)
