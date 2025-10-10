@@ -8,12 +8,13 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 def check_success_request(params):
     """
+
     :param headers: User-Agent одинаковый для запросов из search и reverse, можно посмотреть в Devtools, без него response_json не вернется
     :param params: у search принимаем параметр query; у reverse принмаем lon и lat
     :return: при неуспешном запросе(HTTPError,Exception)  возвращаем None, при успешном response.json()
     """
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 YaBrowser/25.8.0.0 Safari/537.36'}
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; litvinova.irinka2015@yandex.ru) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'}
 
     try:
         with allure.step(f"Отправка запроса к {url}, с параметрами {params}"):
@@ -46,7 +47,8 @@ def search_geokoding(query):
     :param query: запрос считываем из файлика test_data_searche.txt
     :return: в случае успешного получения response_json возвращаем долготу и широту в формате "lon lat" , иначе "None"
     """
-    params = {"q": query, "format": "json"}  # параметры запроса
+
+    params = {"q": query, "format": "json"}
     response_json = check_success_request(params)
     if response_json:
             lon = response_json[0].get("lon")  # lon - Longitude ( долгота)
@@ -66,7 +68,7 @@ def reverse_geokoding(lon, lat):
     :return: name , если запрос response_json был успешен, в противном случае "None"
     """
 
-    params = {"lon": lon, "lat": lat, "format": "json"}  # параметры запроса
+    params = {"lon": lon, "lat": lat, "format": "json"}
     response_json = check_success_request(params)
     if response_json:
         with allure.step("Извлечение name из json"):
@@ -87,6 +89,7 @@ def load_test_data(file_path, Flag):
     """
     # функция для считывания данных из файла и создания списка с парами значений запрос/ожидаемы результат
     test_data = []
+
     with open(file_path, 'r', encoding='utf-8') as file:
         for line in file:
             line = line.strip()

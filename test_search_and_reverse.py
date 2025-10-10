@@ -9,10 +9,15 @@ from API_documentation import load_test_data
 
 
 class TestSearchGeokoding:
-    file_path = r"C:/Users/litvi/PycharmProjects/PythonProject/nomunation_test/test_data_searche.txt" #Прописываем путь к файлу test_data_searche.txt с тестовыми данными
-    test_data = load_test_data( file_path, False) #  В файле test_data_searche.txt лежат тестовые данные test_search : каждая строка "запрос,ожидаемый_результат" > (query, expected)
-    url = "https://nominatim.openstreetmap.org/search" # url для отправки запроса
-
+    """
+    file_path: путь к файлу test_data_searche.txt с тестовыми данными;
+    формат тестовых  данных: на каждой отдельной строке "запрос,ожидаемый_результат" > [query, expected]
+    test_data: список пар значений [query, expected],  считываем из файла с помощью функции load_test_data
+    Flag True/False показывает, нужно ли делить query дальше на две части (для search не нужно)
+    """
+    file_path = "/home/litvinova-i/PycharmProjects/test1/tests/test_data_searche.txt"
+    test_data = load_test_data(file_path, False)
+    url = "https://nominatim.openstreetmap.org/search"
 
     @allure.feature("search_geokoding")
     @pytest.mark.parametrize("test_data", test_data)
@@ -26,10 +31,9 @@ class TestSearchGeokoding:
 
 
 class TestReverseGeokoding:
-    file_path = " "  #Прописываем путь к файлу test_data_reverse.txt  с тестовыми данными
-    test_data = load_test_data(file_path, True) # В файле test_data_reverse.txt лежат тестовые данные test_reverse : координаты_через_пробел,ожидаемый_результат" > (lon, lat, expected)
-    url = "https://nominatim.openstreetmap.org/reverse" # url для отправки запроса
-
+    file_path = "nomunation_test/test_data_reverse.txt"
+    test_data = load_test_data(file_path, False)
+    url = "https://nominatim.openstreetmap.org/reverse"
 
     @allure.feature("reverse_geokoding")
     @pytest.mark.parametrize("test_data", test_data)
