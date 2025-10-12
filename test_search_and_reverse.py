@@ -7,7 +7,6 @@ from API_documentation import search_geokoding
 from API_documentation import reverse_geokoding
 from API_documentation import load_test_data
 
-
 class TestSearchGeokoding:
     """
     file_path: путь к файлу test_data_searche.txt с тестовыми данными;
