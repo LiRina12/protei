@@ -6,6 +6,7 @@ import logging
 import json
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+
 def check_success_request(url, params):
     """
     :param headers: User-Agent одинаковый для запросов из search и reverse, можно посмотреть в Devtools, без него response_json не вернется
