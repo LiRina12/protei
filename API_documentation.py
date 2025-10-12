@@ -60,7 +60,6 @@ def search_geokoding(query):
         allure.attach("None", name = f"Failed_lon_lat {query}", attachment_type=allure.attachment_type.TEXT)
         return "None"
 
-
 def reverse_geokoding(lon, lat):
     """
     :param lon: считываем из файла с помощью функции load_test_data
