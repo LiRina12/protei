@@ -17,7 +17,6 @@ def check_success_request(url, params):
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; litvinova.irinka2015@yandex.ru) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'}
 
 
-
     try:
         with allure.step(f"Отправка запроса к {url}, с параметрами {params}"):
             response = requests.get(url, params=params, headers=headers)
