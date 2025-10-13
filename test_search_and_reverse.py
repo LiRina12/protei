@@ -33,7 +33,7 @@ class TestSearchGeokoding:
 
 class TestReverseGeokoding:
     file_path = "nomunation_test/test_data_reverse.txt"
-    test_data = load_test_data(file_path, False)
+    test_data = load_test_data(file_path, True)
 
     @allure.feature("reverse_geokoding")
     @pytest.mark.parametrize("test_data", test_data)
