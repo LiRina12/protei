@@ -6,7 +6,7 @@ from API_documentation import check_success_request
 from API_documentation import search_geokoding
 from API_documentation import reverse_geokoding
 from API_documentation import load_test_data
-
+from pathlib import Path
 
 
 class TestSearchGeokoding:
@@ -16,8 +16,9 @@ class TestSearchGeokoding:
     test_data: список пар значений [query, expected],  считываем из файла с помощью функции load_test_data
     Flag True/False показывает, нужно ли делить query дальше на две части (для search не нужно)
     """
-    file_path = "/home/litvinova-i/PycharmProjects/test1/tests/test_data_searche.txt"
-    test_data = load_test_data(file_path, False)
+    relative_path = Path('test_data_searche.txt')
+    absolute_path = relative_path.resolve()
+    test_data = load_test_data(absolute_path, False)
 
 
     @allure.feature("search_geokoding")
@@ -32,8 +33,10 @@ class TestSearchGeokoding:
 
 
 class TestReverseGeokoding:
-    file_path = "nomunation_test/test_data_reverse.txt"
-    test_data = load_test_data(file_path, True)
+
+    relative_path = Path('test_data_reverse.txt')
+    absolute_path = relative_path.resolve()
+    test_data = load_test_data(absolute_path, True)
 
     @allure.feature("reverse_geokoding")
     @pytest.mark.parametrize("test_data", test_data)
