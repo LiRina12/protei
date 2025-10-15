@@ -2,10 +2,8 @@ import requests
 from requests.exceptions import HTTPError
 import pytest
 import allure
-from API_documentation import check_success_request
-from API_documentation import search_geokoding
-from API_documentation import reverse_geokoding
-from API_documentation import load_test_data
+from API_documentation import check_success_request, search_geokoding, reverse_geokoding
+from input_test_data__from_text_file import load_test_data
 from pathlib import Path
 
 
