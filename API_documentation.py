@@ -33,12 +33,12 @@ def check_success_request(url, params):
         with allure.step(f"В ответ на запрос получили {err}"):
             logging.error(f'Other error: {err}')
             allure.attach(str(err), name="Other Error", attachment_type=allure.attachment_type.TEXT)
-            return "None"
+            return None
     else:
         if response.status_code == 200:
             with allure.step("Попытка получения response.json, status_response = 200"):
                 response_json = response.json()
-                allure.attach(json.dumps(response_json, indent=2), name="Response_json", attachment_type=allure.attachment_type.JSON)
+                allure.attach(json.dumps(response_json, indent=1), name="Response_json", attachment_type=allure.attachment_type.JSON)
                 return response_json
         else:
             allure.attach(response.text, name="Not_200_response", attachment_type=allure.attachment_type.TEXT)
@@ -59,8 +59,8 @@ def search_geokoding(url, query):
             allure.attach(result, name= f"Lon_lat {query}", attachment_type=allure.attachment_type.TEXT)
             return result
     else:
-        allure.attach("None", name = f"Failed_lon_lat {query}", attachment_type=allure.attachment_type.TEXT)
-        return "None"
+        allure.attach("Response_json is None", name = f"Failed_lon_lat {query}", attachment_type=allure.attachment_type.TEXT)
+        return None
 
 def reverse_geokoding(url,lon, lat):
     """
@@ -79,8 +79,8 @@ def reverse_geokoding(url,lon, lat):
             result = name
             return result
     else:
-        allure.attach("None", name=f"Failed_name {lon},{lat}", attachment_type=allure.attachment_type.TEXT)
-        return "None"
+        allure.attach("Response_json is None", name=f"Failed_name {lon},{lat}", attachment_type=allure.attachment_type.TEXT)
+        return None
 
 
 
