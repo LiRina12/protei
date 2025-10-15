@@ -3,20 +3,15 @@ from requests.exceptions import HTTPError
 import pytest
 import allure
 from API_documentation import check_success_request, search_geokoding, reverse_geokoding
-from input_test_data__from_text_file import load_test_data
-from pathlib import Path
+from test_cases_searche import test_data_search, test_data_reverse
+
 
 
 class TestSearchGeokoding:
     """
-    absolute_path: абсолютный путь к файлу test_data_searche.txt с тестовыми данными;
-    формат тестовых  данных: на каждой отдельной строке "запрос,ожидаемый_результат" > [query, expected]
-    test_data: список пар значений [query, expected],  считываем из файла с помощью функции load_test_data
-    Flag True/False показывает, нужно ли делить query дальше на две части (для search не нужно)
+
     """
-    relative_path = Path('test_data_searche.txt')
-    absolute_path = relative_path.resolve()
-    test_data = load_test_data(absolute_path, False)
+    test_data = test_data = [(number_case['query'], number_case['expected']) for number_case in test_data_search]
     url_end = "search"
     url_nomination = "https://nominatim.openstreetmap.org/"
     url = url_nomination + url_end
@@ -34,9 +29,7 @@ class TestSearchGeokoding:
 
 class TestReverseGeokoding:
 
-    relative_path = Path('test_data_reverse.txt')
-    absolute_path = relative_path.resolve()
-    test_data = load_test_data(absolute_path, True)
+    test_data = [(number_case['lon'], number_case['lat'], number_case['expected']) for number_case in test_data_reverse]
     url_end = "reverse"
     url_nomination = "https://nominatim.openstreetmap.org/"
     url = url_nomination + url_end
