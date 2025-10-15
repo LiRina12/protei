@@ -13,6 +13,7 @@ def check_success_request(url, params):
     :param params: у search принимаем параметр query; у reverse принмаем lon и lat
     :return: при неуспешном запросе(HTTPError,Exception)  возвращаем None, при успешном response.json()
     """
+
     headers = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; litvinova.irinka2015@yandex.ru) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'}
 
@@ -43,12 +44,12 @@ def check_success_request(url, params):
             allure.attach(response.text, name="Not_200_response", attachment_type=allure.attachment_type.TEXT)
             return None
 
-def search_geokoding(query):
+def search_geokoding(url, query):
     """
     :param query: запрос считываем из файлика test_data_searche.txt
     :return: в случае успешного получения response_json возвращаем долготу и широту в формате "lon lat" , иначе "None"
     """
-    url = "https://nominatim.openstreetmap.org/search"
+
     params = {"q": query, "format": "json"}
     response_json = check_success_request(url, params)
     if response_json:
@@ -61,13 +62,13 @@ def search_geokoding(query):
         allure.attach("None", name = f"Failed_lon_lat {query}", attachment_type=allure.attachment_type.TEXT)
         return "None"
 
-def reverse_geokoding(lon, lat):
+def reverse_geokoding(url,lon, lat):
     """
     :param lon: считываем из файла с помощью функции load_test_data
     :param lat: считываем из файла с помощью функции load_test_data
     :return: name , если запрос response_json был успешен, в противном случае "None"
     """
-    url = "https://nominatim.openstreetmap.org/reverse"
+
     params = {"lon": lon, "lat": lat, "format": "json"}
     response_json = check_success_request(url, params)
     if response_json:
