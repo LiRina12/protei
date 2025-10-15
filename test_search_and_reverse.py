@@ -6,7 +6,6 @@ from API_documentation import check_success_request, search_geokoding, reverse_g
 from test_cases_searche import test_data_search, test_data_reverse
 
 
-
 class TestSearchGeokoding:
     """
 
@@ -20,15 +19,13 @@ class TestSearchGeokoding:
     @pytest.mark.parametrize("test_data", test_data)
     def test_search(self, test_data):
         query, expected = test_data
-        with allure.step("Отправка в параметрах запроса query, извлечение lon и lat из response_json"):
+        with allure.step(f"Отправка в параметрах запроса query = {query}, извлечение  lon и lat из response_json"):
             result = search_geokoding(self.url, query)
-        with allure.step("Сравнение полученных lon и lat с ожидаемым результатом"):
-            allure.attach(f"Result: {result} VS Expected: {expected}", name="Assert_details", attachment_type=allure.attachment_type.TEXT)
+        with allure.step(f"Сравнение полученного результата = {result}  с ожидаемым результатом = {expected}"):
             assert result == expected
 
 
 class TestReverseGeokoding:
-
     test_data = [(number_case['lon'], number_case['lat'], number_case['expected']) for number_case in test_data_reverse]
     url_end = "reverse"
     url_nomination = "https://nominatim.openstreetmap.org/"
@@ -40,7 +37,5 @@ class TestReverseGeokoding:
         lon, lat, expected = test_data
         with allure.step("Отправка в параметрах запроса lon и  lat, извлечение name из response_json "):
             result = reverse_geokoding(self.url, lon, lat)
-        with allure.step("Сравнение полученного name  с ожидаемым результатом"):
-            allure.attach(f"Result: {result} VS Expected: {expected}", name="Assert_details", attachment_type=allure.attachment_type.TEXT)
+        with allure.step(f"Сравнение полученного name = {result}  с ожидаемым результатом expected = {expected}"):
             assert result == expected
-
