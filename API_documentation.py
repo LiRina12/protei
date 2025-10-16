@@ -13,7 +13,7 @@ def check_success_request(url, params):
     """
     :param headers: User-Agent одинаковый для запросов из search и reverse, можно посмотреть в Devtools, без него response_json не вернется
     :param params: у search принимаем параметр query; у reverse принмаем lon и lat
-    :return: при неуспешном запросе(HTTPError,Exception)  возвращаем None, при успешном response.json()
+    :return: при неуспешном запросе(HTTPError,Exception)  вызываем raise AssertionErrore, при успешном response.json()
     """
 
     headers = {
@@ -51,8 +51,8 @@ def check_success_request(url, params):
 
 def search_geokoding(url, query):
     """
-    :param query: запрос считываем из файлика test_data_searche.txt
-    :return: в случае успешного получения response_json возвращаем долготу и широту в формате "lon lat" , иначе "None"
+    :param query: запрос считываем из списка test_data , который формируется из словаря test_data_search в файле test_cases_searche.py
+    :return: в случае успешного получения response_json возвращаем долготу и широту в формате "lon lat" , иначе вызываем raise AssertionErrore
     """
 
     params = {"q": query, "format": "json"}
@@ -79,9 +79,9 @@ def search_geokoding(url, query):
 
 def reverse_geokoding(url, lon, lat):
     """
-    :param lon: считываем из файла с помощью функции load_test_data
-    :param lat: считываем из файла с помощью функции load_test_data
-    :return: name , если запрос response_json был успешен, в противном случае "None"
+    :param lon: считываем из списка test_data , который формируется из словаря test_data_reverse  в файле test_cases_searche.py
+    :param lat: считываем из списка test_data , который формируется из словаря test_data_reverse  в файле test_cases_searche.py
+    :return: name , если запрос response_json был успешен, в противном случае вызываем raise AssertionErrore
     """
 
     params = {"lon": lon, "lat": lat, "format": "json"}

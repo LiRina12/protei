@@ -8,9 +8,9 @@ from test_cases_searche import test_data_search, test_data_reverse
 
 class TestSearchGeokoding:
     """
-
+    test_data - список значений query expected, который формируем из словаря test_data_search
     """
-    test_data = test_data = [(number_case['query'], number_case['expected']) for number_case in test_data_search]
+    test_data = [(number_case['query'], number_case['expected']) for number_case in test_data_search]
     url_end = "search"
     url_nomination = "https://nominatim.openstreetmap.org/"
     url = url_nomination + url_end
