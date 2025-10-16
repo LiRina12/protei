@@ -6,14 +6,20 @@ from API_documentation import check_success_request, search_geokoding, reverse_g
 from test_cases_searche import test_data_search, test_data_reverse
 
 
-class TestSearchGeokoding:
+class Nomination:
+    """
+    родительский класс для классов TestSearchGeokoding и TestReverseGeokoding
+    """
+
+    url_nomination = "https://nominatim.openstreetmap.org/"
+
+class TestSearchGeokoding(Nomination):
     """
     test_data - список значений query expected, который формируем из словаря test_data_search
     """
     test_data = [(number_case['query'], number_case['expected']) for number_case in test_data_search]
     url_end = "search"
-    url_nomination = "https://nominatim.openstreetmap.org/"
-    url = url_nomination + url_end
+    url = Nomination.url_nomination + url_end
 
     @allure.feature("search_geokoding")
     @pytest.mark.parametrize("test_data", test_data)
@@ -25,11 +31,10 @@ class TestSearchGeokoding:
             assert result == expected
 
 
-class TestReverseGeokoding:
+class TestReverseGeokoding(Nomination):
     test_data = [(number_case['lon'], number_case['lat'], number_case['expected']) for number_case in test_data_reverse]
     url_end = "reverse"
-    url_nomination = "https://nominatim.openstreetmap.org/"
-    url = url_nomination + url_end
+    url = Nomination.url_nomination + url_end
 
     @allure.feature("reverse_geokoding")
     @pytest.mark.parametrize("test_data", test_data)
