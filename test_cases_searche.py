@@ -16,7 +16,6 @@ test_data_search = [
     {'query': 'Moscow UNION SELECT password FROM users --', 'expected': None},
     {'query': 'import java.util.*;', 'expected': None},
 
-
 ]
 test_data_reverse = [
     {'lon': '37.617499', 'lat': '55.751999', 'expected': 'Московский Кремль и Красная Площадь'},
