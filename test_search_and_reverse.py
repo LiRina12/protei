@@ -14,6 +14,7 @@ class Nomination:
     """
     url_nomination = "https://nominatim.openstreetmap.org/"
 
+
 class TestSearchGeokoding(Nomination):
     """
     absolute_path: абсолютный путь к файлу test_data_searche.csv с тестовыми данными;
