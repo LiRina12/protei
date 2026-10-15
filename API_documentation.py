@@ -6,7 +6,6 @@ import logging
 import json
 
 
-
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
@@ -22,8 +21,7 @@ class API_nomination:
         :param params: у search принимаем параметр query; у reverse принмаем lon и lat
         :return: при неуспешном запросе(HTTPError,Exception)  вызываем raise AssertionErrore, при успешном response.json()"""
 
-        url_end = "search"
-        url = API_nomination.url_nomination + url_end
+
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; litvinova.irinka2015@yandex.ru) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'}

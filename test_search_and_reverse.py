@@ -6,7 +6,6 @@ from API_documentation import API_nomination
 from test_cases_searche import test_data_search, test_data_reverse
 
 
-
 class TestSearchGeokoding:
     """
     test_data - список значений query expected, который формируем из словаря test_data_search
